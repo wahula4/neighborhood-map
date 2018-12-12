@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import ResponsiveDrawer from './ResponsiveDrawer';
 
 class App extends Component {
