@@ -47,8 +47,8 @@ const styles = theme => ({
     width: drawerWidth,
   },
   content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    flexGrow: 1
+    //padding: theme.spacing.unit * 3,
   },
 });
 
@@ -147,11 +147,7 @@ class ResponsiveDrawer extends React.Component {
 }
 
 ResponsiveDrawer.propTypes = {
-  classes: PropTypes.object.isRequired,
-  // Injected by the documentation to work in an iframe.
-  // You won't need it on your project.
-  container: PropTypes.object,
-  theme: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);
