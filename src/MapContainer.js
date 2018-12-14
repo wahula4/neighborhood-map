@@ -1,18 +1,19 @@
-import React, { Component } from 'react';
-import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+import React, { Component } from "react";
+import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
+//import MapMarker from './MapMarker'
 
 const mapStyles = {
   position: "absolute",
-  width: '100%',
-  height: '100%'
-}
+  width: "100%",
+  height: "100%"
+};
 
 export class MapContainer extends Component {
   state = {
-    showingInfoWindow: false,  //Hides or the shows the infoWindow
-    activeMarker: {},          //Shows the active marker upon click
+    showingInfoWindow: false, //Hides or the shows the infoWindow
+    activeMarker: {}, //Shows the active marker upon click
     selectedPlace: {}
-  }
+  };
 
   onMarkerClick = (props, marker, e) =>
     this.setState({
@@ -31,26 +32,54 @@ export class MapContainer extends Component {
   };
 
   render() {
+    var locations = [
+      {
+        title: "Park Ave Penthouse",
+        location: { lat: 40.7713024, lng: -73.9632393 }
+      },
+      {
+        title: "Chelsea Loft",
+        location: { lat: 40.7444883, lng: -73.9949465 }
+      },
+      {
+        title: "Union Square Open Floor Plan",
+        location: { lat: 40.7347062, lng: -73.9895759 }
+      },
+      {
+        title: "East Village Hip Studio",
+        location: { lat: 40.7281777, lng: -73.984377 }
+      },
+      {
+        title: "TriBeCa Artsy Bachelor Pad",
+        location: { lat: 40.7195264, lng: -74.0089934 }
+      },
+      {
+        title: "Chinatown Homey Space",
+        location: { lat: 40.7180628, lng: -73.9961237 }
+      }
+    ];
+
     return (
       <Map
         google={this.props.google}
         zoom={12}
         style={mapStyles}
-        center={{
-          lat: 39.7527,
-          lng: -105.0017,
+        initialCenter={{
+          lat: 40.742352,
+          lng: -74.006210
         }}
       >
-        <Marker
-          onClick={this.onMarkerClick}
-          name={'Union Station'}
-          position={{lat: 39.7527, lng: -105.0017}}
-        />
-        <Marker
-          onClick={this.onMarkerClick}
-          name={'pepsi center'}
-          position={{lat: 39.7487, lng: -105.0077}}
-          />
+        {locations &&
+          locations.map((location, index) => {
+            return (
+              <Marker
+                onClick={this.onMarkerClick}
+                name={location.title}
+                position={location.location}
+                key={index}
+              />
+            );
+          })}
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
@@ -66,5 +95,5 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyAGcv4ZO3qy2_yQeyf65OhSydguc-gcTnk'
+  apiKey: "AIzaSyAGcv4ZO3qy2_yQeyf65OhSydguc-gcTnk"
 })(MapContainer);

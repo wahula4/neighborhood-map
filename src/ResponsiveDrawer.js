@@ -102,7 +102,7 @@ class ResponsiveDrawer extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" noWrap>
-              Responsive drawer
+              NYC Events
             </Typography>
           </Toolbar>
         </AppBar>
