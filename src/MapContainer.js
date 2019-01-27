@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
+import fourSquareAPI from './Api'
+
 
 const mapStyles = {
   position: "absolute",
@@ -8,11 +10,53 @@ const mapStyles = {
 };
 
 export class MapContainer extends Component {
-  state = {
-    showingInfoWindow: false, //Hides or the shows the infoWindow
-    activeMarker: {}, //Shows the active marker upon click
-    selectedPlace: {}
-  };
+
+  constructor() {
+    super();
+    this.state = {
+      venues: [],
+      markers: [],
+     // center: [],
+      zoom: 12,
+      showingInfoWindow: false, //Hides or the shows the infoWindow
+      activeMarker: {}, //Shows the active marker upon click
+      selectedPlace: {}
+    }
+  }
+
+  componentDidMount() {
+    fourSquareAPI.search({
+      near:"New York City, NY",
+      limit: 20,
+      categoryId: "4bf58dd8d48988d18f941735,4bf58dd8d48988d190941735,4bf58dd8d48988d191941735"
+    }).then(results => {
+      const { venues } = results.response;
+      // const { center } = results.response.geocode.feature.geometry;
+      const markers = venues.map(venue => {
+        return {
+          lat: venue.location.lat,
+          lng: venue.location.lng,
+          location: {lat: venue.location.lat, lng: venue.location.lng},
+          name: venue.name,
+          type: venue.categories[0].name,
+          category: venue.categories[0].id
+          // isOpen: false,
+          // isVisible: true
+        }
+      });
+      // this.setState({ venues: venues[0].name })
+      // this.setState({center: results.response.geocode.feature.geometry})  
+      this.setState({markers})
+      console.log('marker info: ', this.state.markers)
+      console.log('venues: ', venues)
+    })
+  }
+
+  // state = {
+  //   showingInfoWindow: false, //Hides or the shows the infoWindow
+  //   activeMarker: {}, //Shows the active marker upon click
+  //   selectedPlace: {}
+  // };
 
   onMarkerClick = (props, marker, e) =>
     this.setState({
@@ -31,50 +75,25 @@ export class MapContainer extends Component {
   };
 
   render() {
-    var locations = [
-      {
-        title: "Park Ave Penthouse",
-        location: { lat: 40.7713024, lng: -73.9632393 }
-      },
-      {
-        title: "Chelsea Loft",
-        location: { lat: 40.7444883, lng: -73.9949465 }
-      },
-      {
-        title: "Union Square Open Floor Plan",
-        location: { lat: 40.7347062, lng: -73.9895759 }
-      },
-      {
-        title: "East Village Hip Studio",
-        location: { lat: 40.7281777, lng: -73.984377 }
-      },
-      {
-        title: "TriBeCa Artsy Bachelor Pad",
-        location: { lat: 40.7195264, lng: -74.0089934 }
-      },
-      {
-        title: "Chinatown Homey Space",
-        location: { lat: 40.7180628, lng: -73.9961237 }
-      }
-    ];
 
     return (
       <Map
         google={this.props.google}
-        zoom={12}
+        zoom={this.state.zoom}
         style={mapStyles}
         initialCenter={{
           lat: 40.742352,
           lng: -74.006210
         }}
       >
-        {locations &&
-          locations.map((location, index) => {
+        {this.state.markers &&
+          this.state.markers.map((location, index) => {
             return (
               <Marker
                 onClick={this.onMarkerClick}
-                name={location.title}
+                name={location.name}
                 position={location.location}
+                type={location.type}
                 key={index}
               />
             );
@@ -86,6 +105,7 @@ export class MapContainer extends Component {
         >
           <div>
             <h4>{this.state.selectedPlace.name}</h4>
+            <h5>{this.state.selectedPlace.type}</h5>
           </div>
         </InfoWindow>
       </Map>
@@ -94,5 +114,5 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyAGcv4ZO3qy2_yQeyf65OhSydguc-gcTnk"
+  apiKey: process.env.REACT_APP_MAP_APIKEY
 })(MapContainer);

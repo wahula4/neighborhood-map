@@ -10,8 +10,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import SimpleSelect from './SimpleSelect';
-import EventList from './EventList';
+import MuseumForm from './SimpleSelect';
+
 
 const drawerWidth = 240;
 
@@ -48,6 +48,8 @@ const styles = theme => ({
 });
 
 class ResponsiveDrawer extends React.Component {
+
+  
   state = {
     mobileOpen: false,
   };
@@ -62,8 +64,9 @@ class ResponsiveDrawer extends React.Component {
     const drawer = (
       <div>
         <div className={classes.toolbar} />
-        <SimpleSelect />
-        <EventList />
+        <MuseumForm />
+        {/* <EventList /> */}
+        
       </div>
     );
 
@@ -119,6 +122,8 @@ class ResponsiveDrawer extends React.Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <MapContainer />
+          {/* <MapContainer {...this.state} />  */}
+
         </main>
       </div>
     );
