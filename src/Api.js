@@ -4,8 +4,10 @@ class Helper {
     }
     static auth() {
         const keys = {
-            client_id: process.env.REACT_APP_CLIENT_ID,
-            client_secret: process.env.REACT_APP_CLIENT_SECRET,
+            client_id: "CZSU1I1TLUPGSF4D4YLPLO1AVDGPFAUBPNVOMKKVDGFGQ3UE",
+            client_secret: "WOMGBHPKTXYINSCROPHBEAEIXGZCXBTGJICZGY4CBC00MDD0",
+            // client_id: process.env.REACT_APP_CLIENT_ID,
+            // client_secret: process.env.REACT_APP_CLIENT_SECRET,
             v:20190120
         };
         return Object.keys(keys)
@@ -42,11 +44,5 @@ class Helper {
 export default class fourSquareAPI {
     static search(urlParams) {
         return Helper.simpleFetch("/venues/search", "GET", urlParams)
-    }
-    static getVenueDetails(Venue_ID) {
-        return Helper.simpleFetch(`/venues/${Venue_ID}`, "GET")
-    }
-    static getVenuePhotos(Venue_ID) {
-        return Helper.simpleFetch(`/venues/${Venue_ID}/photos`, "GET")
     }
 }
