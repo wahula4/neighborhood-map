@@ -1,3 +1,5 @@
+// https://github.com/fullstackreact/google-maps-react
+
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 
@@ -8,7 +10,6 @@ const mapStyles = {
 };
 
 export class GoogleMap extends Component {
-
   render() {
     return (
       <Map
@@ -17,6 +18,7 @@ export class GoogleMap extends Component {
         zoom={this.props.zoom}
         style={mapStyles}
         center={this.props.center}
+        onerror={"error loading map"}
       >
         {this.props.markers &&
           this.props.markers.map((location, index) => {
@@ -35,6 +37,7 @@ export class GoogleMap extends Component {
           marker={this.props.activeMarker}
           visible={this.props.showingInfoWindow}
           onClose={this.props.onClose}
+          onerror={"error loading info window"}
         >
           <div>
             <h4>{this.props.selectedPlace.name}</h4>
