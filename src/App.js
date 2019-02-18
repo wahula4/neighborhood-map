@@ -23,7 +23,7 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     // promise
     fourSquareAPI
       .search({
@@ -59,18 +59,9 @@ class App extends Component {
         const science = venues.filter(
           x => x.categories[0].id === "4bf58dd8d48988d191941735"
         );
-        this.setState({art, history, science})
+        this.setState({ art, history, science });
       });
   }
-
-  // componentDidUpdate() {
-  //   if(this.state.value === "4bf58dd8d48988d18f941735")
-  //     this.setState({venues: this.state.art})
-  //   else if(this.state.value === "4bf58dd8d48988d190941735")
-  //   this.setState({venues: this.state.history})
-  //   else if(this.state.value === "4bf58dd8d48988d191941735")
-  //   this.setState({venues: this.state.science})
-  // }
 
   // open infowindow on marker click
   onMarkerClick = (props, marker, e) => {
@@ -102,27 +93,68 @@ class App extends Component {
 
   // use dropdown to filter museums by art, science, or history
   handleChange(event) {
-    let art = this.state.venues.filter(
-      x => x.categories[0].id === "4bf58dd8d48988d18f941735"
-    );
-    let history = this.state.venues.filter(
-      x => x.categories[0].id === "4bf58dd8d48988d190941735"
-    );
-    let science = this.state.venues.filter(
-      x => x.categories[0].id === "4bf58dd8d48988d191941735"
-    );
-
     if (event.target.value === "4bf58dd8d48988d18f941735") {
-      this.setState({ value: event.target.value, venues: art }, () =>
-        console.log("art", this.state.value)
+      this.setState(
+        {
+          value: event.target.value,
+          venues: this.state.art,
+          markers: this.state.venues.map(venue => {
+            return {
+              lat: venue.location.lat,
+              lng: venue.location.lng,
+              location: { lat: venue.location.lat, lng: venue.location.lng },
+              name: venue.name,
+              type: venue.categories[0].name,
+              category: venue.categories[0].id,
+              id: venue.id
+            };
+          })
+        },
+        () => {
+          console.log("art", this.state.value);
+        }
       );
     } else if (event.target.value === "4bf58dd8d48988d190941735") {
-      this.setState({ value: event.target.value, venues: history }, () =>
-        console.log("history", this.state.value)
+      this.setState(
+        {
+          value: event.target.value,
+          venues: this.state.history,
+          markers: this.state.venues.map(venue => {
+            return {
+              lat: venue.location.lat,
+              lng: venue.location.lng,
+              location: { lat: venue.location.lat, lng: venue.location.lng },
+              name: venue.name,
+              type: venue.categories[0].name,
+              category: venue.categories[0].id,
+              id: venue.id
+            };
+          })
+        },
+        () => {
+          console.log("history", this.state.value);
+        }
       );
     } else if (event.target.value === "4bf58dd8d48988d191941735") {
-      this.setState({ value: event.target.value, venues: science }, () =>
-        console.log("science", this.state.value)
+      this.setState(
+        {
+          value: event.target.value,
+          venues: this.state.science,
+          markers: this.state.venues.map(venue => {
+            return {
+              lat: venue.location.lat,
+              lng: venue.location.lng,
+              location: { lat: venue.location.lat, lng: venue.location.lng },
+              name: venue.name,
+              type: venue.categories[0].name,
+              category: venue.categories[0].id,
+              id: venue.id
+            };
+          })
+        },
+        () => {
+          console.log("science", this.state.value);
+        }
       );
     }
   }

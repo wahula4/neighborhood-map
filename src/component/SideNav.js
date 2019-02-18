@@ -12,7 +12,9 @@ class SideNav extends Component {
           {/* using label for accessibility */}
           <label>
             New York Musuems
-            <select value={this.props.value} onChange={this.props.handleChange}>
+            <select value={this.props.value} 
+                    onChange={this.props.handleChange}
+                    >
               <option value="">Pick a type</option>
               <option value="4bf58dd8d48988d18f941735">Art Museum</option>
               <option value="4bf58dd8d48988d190941735">History Museum</option>
