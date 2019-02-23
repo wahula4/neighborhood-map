@@ -9,7 +9,7 @@ This project focuses on using React.js, the Google Maps API, and the FourSquare 
 ![Homepage snapshot](/neighborhood_map.PNG)
 
 ## Initializing App
-The app is hosted on Surge [here](http://scattered-lock.surge.sh)\
+The app is hosted on Surge [here](tricky-substance.surge.sh)\
 
 OR
 Clone the repository.
