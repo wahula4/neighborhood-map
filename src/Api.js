@@ -34,7 +34,10 @@ class API {
       method,
       headers: API.headers()
     };
-    const res = await fetch(`${API.URL()}${endPoint}?${API.auth()}&${API.urlBuilder(urlParams)}`, requestData);
+    const res = await fetch(
+      `${API.URL()}${endPoint}?${API.auth()}&${API.urlBuilder(urlParams)}`,
+      requestData
+    );
     return await res.json().catch(function(e) {
       console.log(e);
     });
@@ -44,5 +47,8 @@ class API {
 export default class fourSquareAPI {
   static search(urlParams) {
     return API.fetch("/venues/search", "GET", urlParams);
+  }
+  static getVenueDetails(VENUE_ID) {
+    return API.fetch(`/venues/${VENUE_ID}`, "GET");
   }
 }
