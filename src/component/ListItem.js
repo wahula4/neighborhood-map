@@ -11,7 +11,7 @@ class ListItem extends Component {
 
     return (
       // display each location name and run the handleListItemClick function on click
-      <li
+      <li tabIndex="0" 
         className="listItem"
         // when a list item is clicked, open the marker info window on the map
         onClick={() => handleListItemClick(this.props)}

@@ -1,3 +1,5 @@
+/* global google */
+
 import React, { Component } from "react";
 import Map from "./component/Map";
 import fourSquareAPI from "./Api";
@@ -40,7 +42,7 @@ class App extends Component {
       const newVenue = Object.assign(venue, res.response.venue);
       console.log("new venue", newVenue);
       this.setState({ venues: Object.assign(this.state.venues, newVenue) });
-    });
+    }).catch(error => console.log(error) );
   };
 
   // give clicking a list item the same functionality as clicking a marker on the map

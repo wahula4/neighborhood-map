@@ -10,6 +10,8 @@ import {
   InfoWindow
 } from "react-google-maps";
 
+
+
 const MyMapComponent = withScriptjs(
   withGoogleMap(props => (
     <GoogleMap
@@ -30,7 +32,10 @@ const MyMapComponent = withScriptjs(
               <Marker
                 key={index}
                 position={{ lat: marker.lat, lng: marker.lng }}
-                onClick={() => props.handleMarkerClick(marker)}
+                onClick={() => { 
+                  props.handleMarkerClick(marker);
+                  // marker.setAnimation(google.maps.Animation.BOUNCE);
+                }}
                 animation={google.maps.Animation.DROP}
               >
                 {marker.isOpen && (
@@ -61,6 +66,7 @@ const MyMapComponent = withScriptjs(
 );
 
 class Map extends Component {
+
   render() {
     return (
       <MyMapComponent
