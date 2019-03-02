@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Overview
 
-This project focuses on using React.js, the Google Maps API, and the FourSquare API. Currently, the user is shown a map of New York, NY that displays the top 20 art, history, and science musuems chosen by FourSquare. They can be filtered by category using the side navigation on the left of the screen. My top TODO is to allow the user to either input the city of their choice to use the user's current location to display the musuems in their area.
+This project focuses on using React.js, the Google Maps API, and the FourSquare API. Currently, the user is shown a map of Charlotte, NC that displays the top 20 pizza places chosen by FourSquare. They can be filtered by name using the side navigation on the left of the screen. My top TODO is to allow the user to either input the city of their choice to use the user's current location to display the musuems in their area.
 
 ![Homepage snapshot](/neighborhood_map.PNG)
 
